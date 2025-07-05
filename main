@@ -141,7 +141,7 @@ local function moneyButton(name, item)
    })
 end
 
-moneyButton("ALL CITY MONEY 10K (VON)", "Silenced Pistol")
+moneyButton("ALL CITY MONEY 10K (VON)", "money")
 
 -- 👥 BRING TAB
 local BringTab = Window:CreateTab("BRING", nil)
