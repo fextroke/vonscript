@@ -32,7 +32,7 @@ local Window = Rayfield:CreateWindow({
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
-      Key = {"vonontop"}
+      Key = {"https://raw.githubusercontent.com/fextroke/key/refs/heads/main/susi?token=GHSAT0AAAAAADGO56LYIYH7WEY4EU6VYJ322DJB3KA"}  -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
