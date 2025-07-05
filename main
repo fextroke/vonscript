@@ -10,14 +10,14 @@ end)
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "VON'S SCRIPT",
+   Name = "von's script",
    Icon = 0,
-   LoadingTitle = "Made by VON",
-   LoadingSubtitle = "by VON",
+   LoadingTitle = "Made with love",
+   LoadingSubtitle = "by von",
    ConfigurationSaving = {
       Enabled = false,
       FolderName = nil,
-      FileName = "VON NGA"
+      FileName = "von script"
    },
    Discord = {
       Enabled = true,
@@ -32,7 +32,7 @@ local Window = Rayfield:CreateWindow({
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
-      Key = {"vonontop"} or {"gomaontop"} --  Which ever is used is accepted as a key
+      Key = {"vonontop"}
    }
 })
 
@@ -40,8 +40,8 @@ local MainTab = Window:CreateTab("MAIN SCRIPT", nil)
 MainTab:CreateSection("Main")
 
 Rayfield:Notify({
-   Title = "VON NGA",
-   Content = "Thankyou For Using VON Script",
+   Title = "pwnded by von",
+   Content = "Thankyou For Using Von's Script",
    Duration = 8,
 })
 
