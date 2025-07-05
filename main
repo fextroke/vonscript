@@ -160,6 +160,7 @@ BringTab:CreateButton({
          if humanoid then
             humanoid.WalkSpeed = 0
             humanoid.JumpPower = 0
+            targetRoot.Anchored = true
          end
          Rayfield:Notify({
             Title = "BRING & FREEZE",
@@ -186,6 +187,7 @@ BringTab:CreateButton({
          if humanoid then
             humanoid.WalkSpeed = 16
             humanoid.JumpPower = 50
+            root.Anchored = false
          end
          Rayfield:Notify({
             Title = "UNBRING & UNFREEZE",
