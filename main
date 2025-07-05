@@ -2,13 +2,17 @@
 if getgenv().VON_SCRIPT_LOADED then return end
 getgenv().VON_SCRIPT_LOADED = true
 
---  Optional: Destroy duplicate Rayfield UI if it exists
+--  Optional: Destroy duplicate Rayfield UI
 pcall(function()
    game.CoreGui:FindFirstChild("Rayfield"):Destroy()
 end)
 
+--  Load Rayfield UI
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local LocalPlayer = game.Players.LocalPlayer
+local selectedPlayer = ""
 
+--  Rayfield Window
 local Window = Rayfield:CreateWindow({
    Name = "von's script",
    Icon = 0,
@@ -36,15 +40,17 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+--  MAIN TAB
 local MainTab = Window:CreateTab("MAIN SCRIPT", nil)
 MainTab:CreateSection("Main")
 
 Rayfield:Notify({
    Title = "pwnded by von",
-   Content = "Thankyou For Using Von's Script",
+   Content = "Thank you for using Von's Script",
    Duration = 8,
 })
 
+--  Online Buttons
 local function addButton(name, url)
    MainTab:CreateButton({
       Name = name,
@@ -54,7 +60,6 @@ local function addButton(name, url)
    })
 end
 
--- 🔗 Online Scripts
 addButton("INFINITE YIELD (VON)", "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
 addButton("MUSIC EXPO (VON)", "https://pastebin.com/raw/i0BvGEMG")
 addButton("FADED (VON)", "https://raw.githubusercontent.com/NighterEpic/Faded-Grid/main/YesEpic")
@@ -63,58 +68,62 @@ addButton("HITBOX EXTENDER (VON)", "https://raw.githubusercontent.com/Vcsk/Roblo
 addButton("ESP (VON)", "https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP")
 addButton("ALADIA AIMBOT (VON)", "https://raw.githubusercontent.com/VonScriptHub/TAONG-GOMA/main/aladia_aimbot.lua")
 
--- ✅ Inline BIGHEAD (working)
+--  BIG HEAD
 local Button = MainTab:CreateButton({
    Name = "BIG HEAD [GOMA]",
    Callback = function()
    _G.HeadSize = 4 _G.Disabled = true game:GetService('RunService').RenderStepped:connect(function() if _G.Disabled then for i,v in next, game:GetService('Players'):GetPlayers() do if v.Name ~= game:GetService('Players').LocalPlayer.Name then pcall(function() v.Character.Head.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize) v.Character.Head.Transparency = 0.4 v.Character.Head.BrickColor = BrickColor.new("Red") v.Character.Head.Material = "Neon" v.Character.Head.CanCollide = false v.Character.Head.Massless = true end) end end end end)
    end,
 })
--- ✅ Inline LOOPBRING (working)
+
+--  LOOPBRING
 MainTab:CreateButton({
    Name = "LOOPBRING (VON)",
    Callback = function()
       if getgenv().LoopBringConn then
          getgenv().LoopBringConn:Disconnect()
          getgenv().LoopBringConn = nil
-         Rayfield:Notify({Title="LOOPBRING",Content="Stopped",Duration=3})
+         Rayfield:Notify({Title="LOOPBRING", Content="Stopped", Duration=3})
          return
       end
 
-      local targetName = selectedPlayer
-      if not targetName or targetName == "" then
-         Rayfield:Notify({Title="ERROR",Content="Set Target Username above",Duration=3})
+      if selectedPlayer == "" then
+         Rayfield:Notify({Title="ERROR", Content="Set Target Username above", Duration=3})
          return
       end
 
       getgenv().LoopBringConn = game:GetService("RunService").RenderStepped:Connect(function()
-         local p = game.Players:FindFirstChild(targetName)
-         local lp = game.Players.LocalPlayer
-         if p and p.Character and lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
-            p.Character:SetPrimaryPartCFrame(lp.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, 0))
+         local p = game.Players:FindFirstChild(selectedPlayer)
+         if p and p.Character and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local hrp = p.Character:FindFirstChild("HumanoidRootPart")
+            local myHrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp and myHrp then
+               hrp.CFrame = myHrp.CFrame * CFrame.new(3, 0, 0)
+            end
          end
       end)
-      Rayfield:Notify({Title="LOOPBRING",Content="Bringing " .. targetName,Duration=3})
+
+      Rayfield:Notify({Title="LOOPBRING", Content="Bringing " .. selectedPlayer, Duration=3})
    end,
 })
 
--- ✅ Inline FLING ALL (working)
+-- ✅ FLING ALL
 MainTab:CreateButton({
    Name = "FLING ALL (VON)",
    Callback = function()
       for _, p in pairs(game.Players:GetPlayers()) do
-         if p ~= game.Players.LocalPlayer and p.Character then
+         if p ~= LocalPlayer and p.Character then
             local hrp = p.Character:FindFirstChild("HumanoidRootPart")
             if hrp then
                hrp.AssemblyLinearVelocity = Vector3.new(0, 500, 0)
             end
          end
       end
-      Rayfield:Notify({Title="FLING ALL",Content="All players flung",Duration=3})
+      Rayfield:Notify({Title="FLING ALL", Content="All players flung", Duration=3})
    end,
 })
 
--- 🔫 SPAWN GUN TAB
+-- ✅ SPAWN GUN TAB
 local STab = Window:CreateTab("SPAWN GUN", nil)
 STab:CreateSection("SPAWN GUN")
 
@@ -132,43 +141,38 @@ gunButton("ALL CITY Glock-17 (VON)", "Glock-17")
 gunButton("ALL CITY Glock-19 (VON)", "Glock-19")
 gunButton("ALL CITY Desert Deagle (VON)", "Desert Deagle")
 
--- 👥 BRING TAB
+-- ✅ BRING TAB
 local BringTab = Window:CreateTab("BRING", nil)
 BringTab:CreateSection("Bring Controls")
-
-local savedPositions = {}
-selectedPlayer = ""
 
 BringTab:CreateInput({
    Name = "Target Username",
    PlaceholderText = "Enter Player Name",
    RemoveTextAfterFocusLost = false,
-   Callback = function(Text)
-      selectedPlayer = Text
+   Callback = function(text)
+      selectedPlayer = text
    end,
 })
 
 BringTab:CreateButton({
    Name = "Bring User (with Freeze)",
    Callback = function()
-      local function bringPlayerToLocal(player)
-    if LocalPlayer.Character and player.Character then
-        local root = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        local targetRoot = player.Character:FindFirstChild("HumanoidRootPart")
-        local humanoid = player.Character:FindFirstChildWhichIsA("Humanoid")
-        if root and targetRoot and humanoid then
+      local player = game.Players:FindFirstChild(selectedPlayer)
+      if player and LocalPlayer.Character and player.Character then
+         local root = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+         local targetRoot = player.Character:FindFirstChild("HumanoidRootPart")
+         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+         if root and targetRoot and humanoid then
             targetRoot.CFrame = root.CFrame + Vector3.new(math.random(-2, 2), 0, math.random(-2, 2))
             humanoid.WalkSpeed = 0
             humanoid.JumpPower = 0
             targetRoot.Anchored = true
-        end
-    end
-end
-         Rayfield:Notify({
-            Title = "BRING & FREEZE",
-            Content = "Player " .. player.Name .. " was brought and frozen.",
-            Duration = 5
-         })
+            Rayfield:Notify({
+               Title = "BRING & FREEZE",
+               Content = "Player " .. player.Name .. " was brought and frozen.",
+               Duration = 5
+            })
+         end
       else
          Rayfield:Notify({
             Title = "ERROR",
@@ -182,26 +186,24 @@ end
 BringTab:CreateButton({
    Name = "Unbring User",
    Callback = function()
-      local function unfreezePlayer(player)
-    if player.Character then
-        local humanoid = player.Character:FindFirstChildWhichIsA("Humanoid")
-        local root = player.Character:FindFirstChild("HumanoidRootPart")
-        if humanoid and root then
+      local player = game.Players:FindFirstChild(selectedPlayer)
+      if player and player.Character then
+         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+         local root = player.Character:FindFirstChild("HumanoidRootPart")
+         if humanoid and root then
             humanoid.WalkSpeed = 16
             humanoid.JumpPower = 50
             root.Anchored = false
-        end
-    end
-end
-         Rayfield:Notify({
-            Title = "UNBRING & UNFREEZE",
-            Content = "Player " .. player.Name .. " was returned and unfrozen.",
-            Duration = 5
-         })
+            Rayfield:Notify({
+               Title = "UNBRING & UNFREEZE",
+               Content = "Player " .. player.Name .. " was returned and unfrozen.",
+               Duration = 5
+            })
+         end
       else
          Rayfield:Notify({
             Title = "ERROR",
-            Content = "No saved position or player not found.",
+            Content = "Player not found or invalid.",
             Duration = 5
          })
       end
