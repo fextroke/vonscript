@@ -136,12 +136,16 @@ local function moneyButton(money, item)
    STab:CreateButton({
       Name = money,
       Callback = function(1)
-         game:GetService("ReplicatedStorage").GunShop.Events.Purchase:FireServer(money, -10000)
-      end,
+         local args = {
+    [1] = "Silenced Pistol",
+    [2] = -0
+}
+
+game:GetService("ReplicatedStorage").GunShop.Events.Purchase:FireServer("Silenced Pistol", -10000)
    })
 end
 
-moneyButton("ALL CITY MONEY 10K (VON)", "money")
+moneyButton("ALL CITY MONEY 10K (VON)", "Silenced Pistol")
 
 -- 👥 BRING TAB
 local BringTab = Window:CreateTab("BRING", nil)
