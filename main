@@ -32,7 +32,7 @@ local Window = Rayfield:CreateWindow({
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
-      Key = {"vonontop or gomaontop"}
+      Key = {"vonontop"} or {"gomaontop"} --  Which ever is used is accepted as a key
    }
 })
 
