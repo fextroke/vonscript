@@ -132,11 +132,11 @@ gunButton("ALL CITY Glock-17 (VON)", "Glock-17")
 gunButton("ALL CITY Glock-19 (VON)", "Glock-19")
 gunButton("ALL CITY Desert Deagle (VON)", "Desert Deagle")
 
-local function moneyButton(name, item)
+local function moneyButton(money, item)
    STab:CreateButton({
       Name = money,
       Callback = function(1)
-         game:GetService("ReplicatedStorage").GunShop.Events.Purchase:FireServer(item, -10000)
+         game:GetService("ReplicatedStorage").GunShop.Events.Purchase:FireServer(money, -10000)
       end,
    })
 end
