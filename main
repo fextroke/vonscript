@@ -28,11 +28,11 @@ local Window = Rayfield:CreateWindow({
    KeySettings = {
       Title = "VON MAIN",
       Subtitle = "LINK IN DISCORD",
-      Note = "THIS SCRIPT IS WITH TAONG GOMA",
+      Note = "THIS SCRIPT IS MADE BY GOMA (ONLY GOMA KNOW'S THE KEY)",
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
-      Key = {"vonontop"} or {"gomaontop"}
+      Key = {"vonontop or gomaontop"}
    }
 })
 
