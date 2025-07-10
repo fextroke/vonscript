@@ -14,7 +14,7 @@ local selectedPlayer = ""
 
 --  Rayfield Window
 local Window = Rayfield:CreateWindow({
-   Name = "von's script",
+   Name = "vghn.xyz script",
    Icon = 0,
    LoadingTitle = "Made with love",
    LoadingSubtitle = "by von",
@@ -30,7 +30,7 @@ local Window = Rayfield:CreateWindow({
    },
    KeySystem = true,
    KeySettings = {
-      Title = "VON MAIN",
+      Title = "vghn.xyz main",
       Subtitle = "LINK IN DISCORD",
       Note = "THIS SCRIPT IS MADE BY GOMA (ONLY GOMA KNOW'S THE KEY)",
       FileName = "Check Discord For Key",
