@@ -31,8 +31,8 @@ local Window = Rayfield:CreateWindow({
    KeySystem = true,
    KeySettings = {
       Title = "vghn.xyz main",
-      Subtitle = "LINK IN DISCORD",
-      Note = "THIS SCRIPT IS MADE BY GOMA (ONLY GOMA KNOW'S THE KEY)",
+      Subtitle = "Von nga e",
+      Note = "WAG KANG KUPAL",
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
@@ -41,7 +41,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 --  MAIN TAB
-local MainTab = Window:CreateTab("MAIN SCRIPT", nil)
+local MainTab = Window:CreateTab("MAIN", nil)
 MainTab:CreateSection("Main")
 
 Rayfield:Notify({
@@ -70,7 +70,7 @@ addButton("ALADIA AIMBOT (VON)", "https://raw.githubusercontent.com/VonScriptHub
 
 --  BIG HEAD
 local Button = MainTab:CreateButton({
-   Name = "BIG HEAD [GOMA]",
+   Name = "BIG HEAD [VON]",
    Callback = function()
    _G.HeadSize = 4 _G.Disabled = true game:GetService('RunService').RenderStepped:connect(function() if _G.Disabled then for i,v in next, game:GetService('Players'):GetPlayers() do if v.Name ~= game:GetService('Players').LocalPlayer.Name then pcall(function() v.Character.Head.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize) v.Character.Head.Transparency = 0.4 v.Character.Head.BrickColor = BrickColor.new("Red") v.Character.Head.Material = "Neon" v.Character.Head.CanCollide = false v.Character.Head.Massless = true end) end end end end)
    end,
@@ -124,8 +124,8 @@ MainTab:CreateButton({
 })
 
 -- ✅ SPAWN GUN TAB
-local STab = Window:CreateTab("SPAWN GUN", nil)
-STab:CreateSection("SPAWN GUN")
+local STab = Window:CreateTab("GUN SPAWN", nil)
+STab:CreateSection("GUN SPAWN")
 
 local function gunButton(name, item)
    STab:CreateButton({
