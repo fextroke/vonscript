@@ -266,44 +266,45 @@ BringTab:CreateButton({
    end,
 })
 
+local selectedPlayer = ""  -- Make sure to set this from your UI, like a TextBox
+
 BringTab:CreateButton({
-    Name = "Bring User v2",
-    Callback = function()
-        local ReplicatedStorage = game:GetService("ReplicatedStorage")
-        local Players = game:GetService("Players")
+   Name = "Bring User v2",
+   Callback = function()
+      BringRandom.MouseButton1Click:Connect(function()
+         local ReplicatedStorage = game:GetService("ReplicatedStorage")
+         local Players = game:GetService("Players")
 
-        local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
-        local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
-        local localPlayer = Players.LocalPlayer
+         local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
+         local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
+         local localPlayer = Players.LocalPlayer
 
-        -- Replace this with however you're getting the target player's name
-        local selectedPlayer = YourMethodToGetSelectedPlayer() -- FIX: Replace with your own logic
+         -- Example: get selected player from TextBox
+         selectedPlayer = SomeTextBox.Text  -- Replace with your actual textbox
 
-        -- Validate player
-        if selectedPlayer and selectedPlayer ~= "" then
+         if selectedPlayer and selectedPlayer ~= "" then
             local targetPlayer = Players:FindFirstChild(selectedPlayer)
 
             if targetPlayer and targetPlayer ~= localPlayer then
-                -- Start carry
-                carryRemote:FireServer({
-                    cmd = "Carry",
-                    carrychoicesss = carryChoice,
-                    firstPlr = targetPlayer
-                })
+               carryRemote:FireServer({
+                  cmd = "Carry",
+                  carrychoicesss = carryChoice,
+                  firstPlr = targetPlayer
+               })
 
-                wait(0.07)
+               wait(0.07)
 
-                -- Cancel carry
-                carryRemote:FireServer({
-                    cmd = "Declinecarry"
-                })
+               carryRemote:FireServer({
+                  cmd = "Declinecarry"
+               })
             else
-                warn("Selected player is invalid or is yourself.")
+               warn("Selected player is invalid or is yourself.")
             end
-        else
+         else
             warn("No player name entered.")
-        end
-    end
+         end
+      end)
+   end
 })
 
 -- Aimbot Tab
