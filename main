@@ -210,6 +210,34 @@ BringTab:CreateButton({
    end,
 })
 
+BringTab:CreateButton({
+   Name = "Unbring User",
+   Callback = function()
+      BringAll.MouseButton1Click:Connect(function()
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Players = game:GetService("Players")
+
+	local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
+	local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
+	local localPlayer = Players.LocalPlayer
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= localPlayer then
+			carryRemote:FireServer({
+				cmd = "Carry",
+				carrychoicesss = carryChoice,
+				firstPlr = player
+			})
+		end
+	end
+
+	wait(0.07)
+
+	carryRemote:FireServer({
+		cmd = "Declinecarry"
+	}) 
+end)
+
 -- Aimbot Tab
 MainTab:CreateButton({
    Name = "AIMBOT (VON)",
