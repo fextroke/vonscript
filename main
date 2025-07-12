@@ -265,6 +265,43 @@ BringTab:CreateButton({
       })
    end,
 })
+
+BringTab:CreateButton({
+   Name = "Bring all",
+   Callback = function()
+      BringRandom.MouseButton1Click:Connect(function()
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Players = game:GetService("Players")
+
+	local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
+	local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
+	local localPlayer = Players.LocalPlayer
+
+	-- Make sure selectedPlayer is set and valid
+	if selectedPlayer and selectedPlayer ~= "" then
+		local targetPlayer = Players:FindFirstChild(selectedPlayer)
+
+		if targetPlayer and targetPlayer ~= localPlayer then
+			carryRemote:FireServer({
+				cmd = "Carry",
+				carrychoicesss = carryChoice,
+				firstPlr = targetPlayer
+			})
+
+			wait(0.07)
+
+			carryRemote:FireServer({
+				cmd = "Declinecarry"
+			})
+		else
+			warn("Selected player is invalid or is yourself.")
+		end
+	else
+		warn("No player name entered.")
+	end
+end)
+
+
 -- Aimbot Tab
 MainTab:CreateButton({
    Name = "AIMBOT (VON)",
