@@ -266,26 +266,24 @@ BringTab:CreateButton({
    end,
 })
 
-local selectedPlayer = ""  -- Make sure to set this from your UI, like a TextBox
-
 BringTab:CreateButton({
    Name = "Bring User v2",
    Callback = function()
-      BringRandom.MouseButton1Click:Connect(function()
-         local ReplicatedStorage = game:GetService("ReplicatedStorage")
-         local Players = game:GetService("Players")
+      local ReplicatedStorage = game:GetService("ReplicatedStorage")
+      local Players = game:GetService("Players")
+      local LocalPlayer = Players.LocalPlayer
 
+      local BringRandom = SomeGui:WaitForChild("BringRandom") -- Replace with your actual path to the button
+      local selectedPlayer = "" -- Replace this with your logic (e.g. set from a TextBox)
+
+      BringRandom.MouseButton1Click:Connect(function()
          local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
          local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
-         local localPlayer = Players.LocalPlayer
-
-         -- Example: get selected player from TextBox
-         selectedPlayer = SomeTextBox.Text  -- Replace with your actual textbox
 
          if selectedPlayer and selectedPlayer ~= "" then
             local targetPlayer = Players:FindFirstChild(selectedPlayer)
 
-            if targetPlayer and targetPlayer ~= localPlayer then
+            if targetPlayer and targetPlayer ~= LocalPlayer then
                carryRemote:FireServer({
                   cmd = "Carry",
                   carrychoicesss = carryChoice,
