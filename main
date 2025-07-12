@@ -155,7 +155,7 @@ BringTab:CreateInput({
 })
 
 BringTab:CreateButton({
-   Name = "Bring User (with Freeze)",
+   Name = "Bring User (visual),
    Callback = function()
       local player = game.Players:FindFirstChild(selectedPlayer)
       if player and LocalPlayer.Character and player.Character then
@@ -184,7 +184,7 @@ BringTab:CreateButton({
 })
 
 BringTab:CreateButton({
-   Name = "Unbring User",
+   Name = "Unbring User (visual)",
    Callback = function()
       local player = game.Players:FindFirstChild(selectedPlayer)
       if player and player.Character then
@@ -267,7 +267,7 @@ BringTab:CreateButton({
 })
 
 BringTab:CreateButton({
-   Name = "Bring all",
+   Name = "Bring User v2",
    Callback = function()
       BringRandom.MouseButton1Click:Connect(function()
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
