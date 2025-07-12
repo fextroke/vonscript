@@ -211,7 +211,7 @@ BringTab:CreateButton({
 })
 
 BringTab:CreateButton({
-   Name = "Unbring User",
+   Name = "Bring all",
    Callback = function()
       BringAll.MouseButton1Click:Connect(function()
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -219,6 +219,34 @@ BringTab:CreateButton({
 
 	local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
 	local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Couple Hug")
+	local localPlayer = Players.LocalPlayer
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= localPlayer then
+			carryRemote:FireServer({
+				cmd = "Carry",
+				carrychoicesss = carryChoice,
+				firstPlr = player
+			})
+		end
+	end
+
+	wait(0.07)
+
+	carryRemote:FireServer({
+		cmd = "Declinecarry"
+	}) 
+end)
+
+BringTab:CreateButton({
+   Name = "Bring all v2",
+   Callback = function()
+      BringAll.MouseButton1Click:Connect(function()
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Players = game:GetService("Players")
+
+	local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
+	local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Sakal")
 	local localPlayer = Players.LocalPlayer
 
 	for _, player in pairs(Players:GetPlayers()) do
