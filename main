@@ -155,7 +155,7 @@ BringTab:CreateInput({
 })
 
 BringTab:CreateButton({
-   Name = "Bring User (visual),
+   Name = "Bring User (visual)",
    Callback = function()
       local player = game.Players:FindFirstChild(selectedPlayer)
       if player and LocalPlayer.Character and player.Character then
